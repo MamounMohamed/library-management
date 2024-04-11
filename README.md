@@ -42,7 +42,7 @@ The project is organized into the following packages:
 - **Exceptions**: Custom exception classes for handling errors gracefully.
 - **Services**: Contains the service classes that implement business logic.
 - **Repositories**: Interfaces for database interaction using Spring Data JPA.
-- **Tests**: Unit and integration tests for controllers and services.
+- **Tests**: Unit and integration tests for controllers , repositories and services.
 
 ## How to Run
 
