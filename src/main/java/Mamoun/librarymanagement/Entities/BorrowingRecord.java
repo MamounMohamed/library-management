@@ -1,9 +1,5 @@
 package Mamoun.librarymanagement.Entities;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,7 +22,12 @@ public class BorrowingRecord {
     private Book book;
     @ManyToOne
     private Patron patron;
+
+    @Column(nullable = false)
+
     private LocalDate borrowingDate;
+    @Column(nullable = false)
+
     private LocalDate returnDate;
 
     public BorrowingRecord(Book book, Patron patron, LocalDate borrowingDate, LocalDate returnDate) {
