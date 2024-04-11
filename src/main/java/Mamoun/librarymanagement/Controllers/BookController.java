@@ -1,6 +1,7 @@
 package Mamoun.librarymanagement.Controllers;
 
 import Mamoun.librarymanagement.DTO.BookDTO;
+import Mamoun.librarymanagement.Exceptions.DeleteException;
 import Mamoun.librarymanagement.Exceptions.NotFoundException;
 import Mamoun.librarymanagement.Services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -98,7 +99,10 @@ public class BookController {
         try {
             bookService.deleteBook(id);
             return ResponseEntity.noContent().build();
-        }        catch (Exception e){
+        }catch (DeleteException e){
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.CONFLICT);
+        }
+        catch (Exception e){
             return new ResponseEntity<>("Internal Server Error occurred while serving the request",HttpStatus.INTERNAL_SERVER_ERROR);
         }
 

@@ -2,6 +2,7 @@ package Mamoun.librarymanagement.Controllers;
 
 import Mamoun.librarymanagement.DTO.PatronDTO;
 import Mamoun.librarymanagement.Exceptions.BookNotAvailableException;
+import Mamoun.librarymanagement.Exceptions.DeleteException;
 import Mamoun.librarymanagement.Exceptions.NotFoundException;
 import Mamoun.librarymanagement.Services.PatronService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,6 +90,8 @@ public class PatronController {
         try {
             patronService.deletePatron(id);
             return ResponseEntity.noContent().build();
+        }catch (DeleteException e){
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.CONFLICT);
         }
         catch (Exception e){
             return new ResponseEntity<>("Internal Server Error occurred while serving the request",HttpStatus.INTERNAL_SERVER_ERROR);

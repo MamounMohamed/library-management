@@ -2,10 +2,7 @@ package Mamoun.librarymanagement.DTO;
 
 import Mamoun.librarymanagement.Entities.Book;
 import Mamoun.librarymanagement.Entities.Patron;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -14,9 +11,10 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class BorrowingRecordDTO {
 
-    private Long id;
+    private long id;
     private long bookId;
 
     private long patronId;

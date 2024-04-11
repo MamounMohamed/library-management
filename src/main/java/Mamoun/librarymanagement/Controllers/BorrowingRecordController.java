@@ -45,8 +45,6 @@ public class BorrowingRecordController {
             @PathVariable("bookId") long bookId,
             @PathVariable("patronId") long patronId) {
         try {
-
-
             BorrowingRecordDTO returnedBook = borrowingRecordService.returnBook(bookId, patronId);
             return new ResponseEntity<>(returnedBook, HttpStatus.OK);
         }

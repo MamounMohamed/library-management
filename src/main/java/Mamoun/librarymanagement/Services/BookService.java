@@ -2,6 +2,7 @@ package Mamoun.librarymanagement.Services;
 
 import Mamoun.librarymanagement.DTO.BookDTO;
 import Mamoun.librarymanagement.Entities.Book;
+import Mamoun.librarymanagement.Exceptions.DeleteException;
 import Mamoun.librarymanagement.Exceptions.NotFoundException;
 import Mamoun.librarymanagement.Mappers.BookMapper;
 import Mamoun.librarymanagement.Repositories.BookRepository;
@@ -74,6 +75,10 @@ public class BookService {
     // Remove a book from the library
     @Transactional
     public void deleteBook(Long id) {
-        bookRepository.deleteById(id);
+        try {
+            bookRepository.deleteById(id);
+        }catch (Exception e) {
+            throw new DeleteException("book with id: " + id + " can't be deleted");
+        }
     }
 }

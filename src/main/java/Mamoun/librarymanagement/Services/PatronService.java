@@ -2,6 +2,7 @@ package Mamoun.librarymanagement.Services;
 
 import Mamoun.librarymanagement.Entities.Patron;
 import Mamoun.librarymanagement.DTO.PatronDTO;
+import Mamoun.librarymanagement.Exceptions.DeleteException;
 import Mamoun.librarymanagement.Exceptions.NotFoundException;
 import Mamoun.librarymanagement.Mappers.PatronMapper;
 import Mamoun.librarymanagement.Repositories.PatronRepository;
@@ -54,7 +55,13 @@ public class PatronService {
         }
         @Transactional
     public void deletePatron(long id){
-            patronRepository.deleteById(id);
+        try{
+        patronRepository.deleteById(id);
+        }
+            catch (Exception e) {
+                throw new DeleteException("book with id: " + id + " can't be deleted");
+            }
         }
     }
+
 
