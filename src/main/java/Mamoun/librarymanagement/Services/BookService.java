@@ -59,7 +59,6 @@ public class BookService {
 
     // Update an existing book's information
     @Transactional
-
     public BookDTO updateBook(Long id, BookDTO updatedBookDTO) {
 
         if (bookRepository.existsById(id)) {
@@ -72,7 +71,6 @@ public class BookService {
         }
     }
 
-    // Remove a book from the library
     @Transactional
     public void deleteBook(Long id) {
         try {
