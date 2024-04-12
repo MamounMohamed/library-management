@@ -64,6 +64,7 @@ class PatronServiceTest {
         // Assert
         assertThat(result).isNotEmpty();
         assertThat(result).hasSize(1);
+        assertThat(result.get(0)).isEqualTo(patronDTO);
         verify(patronRepository, times(1)).findAll();
     }
 
@@ -79,6 +80,8 @@ class PatronServiceTest {
 
         // Assert
         assertThat(result).isNotNull();
+        assertThat(result).isEqualTo(patronDTO);
+
         verify(patronRepository, times(1)).findById(id);
     }
 
@@ -106,6 +109,7 @@ class PatronServiceTest {
 
         // Assert
         assertThat(result).isNotNull();
+        assertThat(result).isEqualTo(patronDTO);
         verify(patronRepository, times(1)).save(patron);
     }
 
@@ -124,6 +128,7 @@ class PatronServiceTest {
 
         // Assert
         assertThat(result).isNotNull();
+        assertThat(result).isEqualTo(updatedPatronDTO);
         verify(patronRepository, times(1)).save(updatedPatron);
     }
 

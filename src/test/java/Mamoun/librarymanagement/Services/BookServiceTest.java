@@ -20,7 +20,6 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 
 class BookServiceTest {
@@ -64,7 +63,8 @@ class BookServiceTest {
 
         // Assert
         assertThat(result).isNotEmpty();
-        assertThat(result.size()).isEqualTo(1);
+        assertThat(result).hasSize(1);
+        assertThat(result.get(0)).isEqualTo(bookDTO);
         verify(bookRepository, times(1)).findAll();
     }
 
@@ -81,7 +81,7 @@ class BookServiceTest {
 
         // Assert
         assertThat(result).isNotNull();
-        assertThat(result.getTitle()).isEqualTo(bookDTO.getTitle());
+        assertThat(result).isEqualTo(bookDTO);
         verify(bookRepository, times(1)).findById(id);
     }
 
@@ -110,6 +110,7 @@ class BookServiceTest {
 
         // Assert
         assertThat(result).isNotNull();
+        assertThat(result).isEqualTo(bookDTO);
         verify(bookRepository, times(1)).save(book);
     }
 
@@ -129,6 +130,8 @@ class BookServiceTest {
 
         // Assert
         assertThat(result).isNotNull();
+        assertThat(result).isEqualTo(updatedBookDTO);
+
         verify(bookRepository, times(1)).save(updatedBook);
     }
 
