@@ -40,6 +40,8 @@ The project is organized into the following packages:
 - **Controllers**: Contains the controllers responsible for handling HTTP requests and responses.
 - **DTO**: Data Transfer Object classes used to transfer data between layers.
 - **Exceptions**: Custom exception classes for handling errors gracefully.
+- **Mappers**: Transform application entities into DTOs for data exchange.
+- **Entities**: Represent application data stored in the database.
 - **Services**: Contains the service classes that implement business logic.
 - **Repositories**: Interfaces for database interaction using Spring Data JPA.
 - **Tests**: Unit and integration tests for controllers , repositories and services.
