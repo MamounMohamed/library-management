@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.Optional;
 
 
 @Service
@@ -62,7 +61,6 @@ public class BorrowingRecordService {
         borrowingRecord.setReturnDate(LocalDate.now());
         BorrowingRecord savedBorrowingRecord = borrowingRecordRepository.save(borrowingRecord);
         return borrowingRecordMapper.toBorrowingRecordDTo(savedBorrowingRecord);
-
     }
 }
 

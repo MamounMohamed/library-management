@@ -37,31 +37,31 @@ public class PatronService {
         throw new NotFoundException("Patron not found with id: " + id);
 
     }
-
-        public PatronDTO addPatron(PatronDTO patronDTO) {
+    @Transactional
+    public PatronDTO addPatron(PatronDTO patronDTO) {
             Patron patron = patronMapper.toPatron(patronDTO);
             Patron savedPatron = patronRepository.save(patron);
             return patronMapper.toPatronDTO(savedPatron);
-        }
+    }
     @Transactional
-        public PatronDTO updatePatron(long id , PatronDTO patronDTO){
-            if(patronRepository.existsById(id)){
-                Patron patron = patronMapper.toPatron(patronDTO);
-                patron.setId(id);
-                Patron savedPatron = patronRepository.save(patron);
-                return patronMapper.toPatronDTO(savedPatron);
-            }
-            throw new NotFoundException("Patron with id: " + id + " is not found");
+    public PatronDTO updatePatron(long id , PatronDTO patronDTO){
+        if(patronRepository.existsById(id)){
+            Patron patron = patronMapper.toPatron(patronDTO);
+            patron.setId(id);
+            Patron savedPatron = patronRepository.save(patron);
+            return patronMapper.toPatronDTO(savedPatron);
         }
-        @Transactional
+        throw new NotFoundException("Patron with id: " + id + " is not found");
+    }
+    @Transactional
     public void deletePatron(long id){
         try{
-        patronRepository.deleteById(id);
+            patronRepository.deleteById(id);
         }
-            catch (Exception e) {
-                throw new DeleteException("book with id: " + id + " can't be deleted");
-            }
+        catch (Exception e) {
+            throw new DeleteException("book with id: " + id + " can't be deleted");
         }
     }
+}
 
 
