@@ -32,7 +32,6 @@ public class BorrowingRecordRepositoryTest {
         Patron patron = Patron.builder().name("Patron 2").contactInformation("+234851456981").build();
         bookRepository.save(book);
         patronRepository.save(patron);
-
         LocalDate borrowingDate = LocalDate.now();
         LocalDate returnDate = LocalDate.now().plusDays(7);
         BorrowingRecord borrowingRecord = new BorrowingRecord(book, patron, borrowingDate, returnDate);
@@ -97,4 +96,60 @@ public class BorrowingRecordRepositoryTest {
         assertThat(foundRecord.get().getBook()).isEqualTo(savedRecord.getBook());
         assertThat(foundRecord.get().getPatron()).isEqualTo(savedRecord.getPatron());
     }
+    @Test
+    void existsByBookId_ExistingBookId_ReturnsTrue() {
+        // Given
+        Book book = Book.builder().title("Title 1").author("Author 1").isbn("M-123").publicationYear(2024).isBorrowed(false).build();
+        Patron patron = Patron.builder().name("Patron 2").contactInformation("+234851456981").build();
+        bookRepository.save(book);
+        patronRepository.save(patron);
+        LocalDate borrowingDate = LocalDate.now();
+        LocalDate returnDate = LocalDate.now().plusDays(7);
+        BorrowingRecord borrowingRecord = new BorrowingRecord(book, patron, borrowingDate, returnDate);
+        borrowingRecordRepository.save(borrowingRecord);
+
+
+
+        // When
+        boolean exists = borrowingRecordRepository.existsByBookId(book.getId());
+
+        // Then
+        assertThat(exists).isEqualTo(true);
+    }
+
+    @Test
+    void existsByBookId_NonExistingBookId_ReturnsFalse() {
+        boolean exists = borrowingRecordRepository.existsByBookId(1L);
+        assertThat(exists).isEqualTo(false);
+    }
+
+    @Test
+    void existsByPatronId_ExistingPatronId_ReturnsTrue() {
+        // Given
+        Book book = Book.builder().title("Title 1").author("Author 1").isbn("M-123").publicationYear(2024).isBorrowed(false).build();
+        Patron patron = Patron.builder().name("Patron 2").contactInformation("+234851456981").build();
+        bookRepository.save(book);
+        patronRepository.save(patron);
+        LocalDate borrowingDate = LocalDate.now();
+        LocalDate returnDate = LocalDate.now().plusDays(7);
+        BorrowingRecord borrowingRecord = new BorrowingRecord(book, patron, borrowingDate, returnDate);
+        borrowingRecordRepository.save(borrowingRecord);
+
+        // When
+        boolean exists = borrowingRecordRepository.existsByPatronId(book.getId());
+
+        // Then
+        assertThat(exists).isEqualTo(true);
+    }
+
+    @Test
+    void existsByPatronId_NonExistingPatronId_ReturnsFalse() {
+        boolean exists = borrowingRecordRepository.existsByPatronId(1L);
+
+        // Then
+        assertThat(exists).isEqualTo(false);
+    }
 }
+
+
+

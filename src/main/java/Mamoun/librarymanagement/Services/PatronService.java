@@ -5,6 +5,7 @@ import Mamoun.librarymanagement.DTO.PatronDTO;
 import Mamoun.librarymanagement.Exceptions.DeleteException;
 import Mamoun.librarymanagement.Exceptions.NotFoundException;
 import Mamoun.librarymanagement.Mappers.PatronMapper;
+import Mamoun.librarymanagement.Repositories.BorrowingRecordRepository;
 import Mamoun.librarymanagement.Repositories.PatronRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +19,13 @@ import java.util.stream.Collectors;
 public class PatronService {
     private final PatronRepository patronRepository;
     private final PatronMapper patronMapper;
+
+    private final BorrowingRecordRepository borrowingRecordRepository;
     @Autowired
-    public PatronService(PatronRepository patronRepository, PatronMapper patronMapper) {
+    public PatronService(PatronRepository patronRepository, PatronMapper patronMapper , BorrowingRecordRepository borrowingRecordRepository) {
         this.patronRepository = patronRepository;
         this.patronMapper = patronMapper;
+        this.borrowingRecordRepository = borrowingRecordRepository;
     }
 
     public List<PatronDTO> getAllPatrons(){
@@ -55,13 +59,11 @@ public class PatronService {
     }
     @Transactional
     public void deletePatron(long id){
-        try{
-            patronRepository.deleteById(id);
-        }
-        catch (Exception e) {
-            throw new DeleteException("book with id: " + id + " can't be deleted");
-        }
+        if(borrowingRecordRepository.existsByPatronId(id))
+            throw new DeleteException("Patron with id: " + id + " can't be deleted because it has a borrowing record");
+        patronRepository.deleteById(id);
     }
+
 }
 
 

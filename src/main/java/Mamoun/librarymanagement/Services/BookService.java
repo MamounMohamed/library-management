@@ -6,6 +6,7 @@ import Mamoun.librarymanagement.Exceptions.DeleteException;
 import Mamoun.librarymanagement.Exceptions.NotFoundException;
 import Mamoun.librarymanagement.Mappers.BookMapper;
 import Mamoun.librarymanagement.Repositories.BookRepository;
+import Mamoun.librarymanagement.Repositories.BorrowingRecordRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,11 +20,14 @@ import java.util.stream.Collectors;
 public class BookService {
 
     private final BookRepository bookRepository;
+    private final BorrowingRecordRepository borrowingRecordRepository;
     private final BookMapper bookMapper;
+
     @Autowired
-    public BookService(BookRepository bookRepository, BookMapper bookMapper) {
+    public BookService(BookRepository bookRepository, BookMapper bookMapper , BorrowingRecordRepository borrowingRecordRepository) {
         this.bookRepository = bookRepository;
         this.bookMapper = bookMapper;
+        this.borrowingRecordRepository = borrowingRecordRepository;
     }
 
 
@@ -41,8 +45,7 @@ public class BookService {
         Optional<Book> bookOptional = bookRepository.findById(id);
         if (bookOptional.isPresent()) {
             Book book = bookOptional.get();
-            BookDTO bookDTO = bookMapper.toBookDTO(book);
-            return bookDTO;
+            return bookMapper.toBookDTO(book);
         } else {
             throw new NotFoundException("Book not found with id: " + id);
         }
@@ -73,10 +76,9 @@ public class BookService {
 
     @Transactional
     public void deleteBook(Long id) {
-        try {
-            bookRepository.deleteById(id);
-        }catch (Exception e) {
-            throw new DeleteException("book with id: " + id + " can't be deleted");
-        }
+        if(borrowingRecordRepository.existsByBookId(id))
+            throw new DeleteException("Book with id: " + id + " can't be deleted because it has a borrowing record");
+        bookRepository.deleteById(id);
     }
 }
+

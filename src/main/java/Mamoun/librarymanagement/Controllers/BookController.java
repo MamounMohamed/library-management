@@ -37,7 +37,7 @@ public class BookController {
             List<BookDTO> books = bookService.getAllBooks();
             return ResponseEntity.ok(books);
         } catch (Exception e){
-            return new ResponseEntity<>("Internal Server Error occurred while serving the request\nMessage: ",HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal Server Error occurred while serving the request\nMessage: " + e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
     }
@@ -52,7 +52,7 @@ public class BookController {
         catch (NotFoundException e ){
             return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
         }catch (Exception e){
-            return new ResponseEntity<>("Internal Server Error occurred while serving the request\nMessage: ",HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal Server Error occurred while serving the request\nMessage: " + e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
 
@@ -68,7 +68,7 @@ public class BookController {
             return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST );
         }
         catch (Exception e){
-            return new ResponseEntity<>("Internal Server Error occurred while serving the request\nMessage: ",HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal Server Error occurred while serving the request\nMessage: " + e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
     }
@@ -87,7 +87,7 @@ public class BookController {
             return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
         }
         catch (Exception e){
-            return new ResponseEntity<>("Internal Server Error occurred while serving the request\nMessage: ",HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal Server Error occurred while serving the request\nMessage: " + e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
 
@@ -103,7 +103,7 @@ public class BookController {
             return new ResponseEntity<>(e.getMessage(),HttpStatus.CONFLICT);
         }
         catch (Exception e){
-            return new ResponseEntity<>("Internal Server Error occurred while serving the request\nMessage: ",HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal Server Error occurred while serving the request\nMessage: " + e.getMessage() ,HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
 
