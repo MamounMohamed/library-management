@@ -1,7 +1,6 @@
 package Mamoun.librarymanagement.Controllers;
 
 import Mamoun.librarymanagement.DTO.PatronDTO;
-import Mamoun.librarymanagement.Exceptions.BookNotAvailableException;
 import Mamoun.librarymanagement.Exceptions.DeleteException;
 import Mamoun.librarymanagement.Exceptions.NotFoundException;
 import Mamoun.librarymanagement.Services.PatronService;
