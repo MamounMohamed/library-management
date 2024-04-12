@@ -136,7 +136,7 @@ public class BorrowingRecordRepositoryTest {
         borrowingRecordRepository.save(borrowingRecord);
 
         // When
-        boolean exists = borrowingRecordRepository.existsByPatronId(book.getId());
+        boolean exists = borrowingRecordRepository.existsByPatronId(patron.getId());
 
         // Then
         assertThat(exists).isEqualTo(true);
