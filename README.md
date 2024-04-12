@@ -55,7 +55,7 @@ The project is organized into the following packages:
 
 ## Testing
 
-The project includes unit tests for controllers and services. To run the tests:
+The project includes unit tests for controllers, repositories and services. To run the tests:
 
 1. Navigate to the project directory.
 2. Run `mvn test` to execute all tests.
