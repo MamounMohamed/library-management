@@ -30,7 +30,7 @@ public class PatronController {
             return ResponseEntity.ok(patrons);
         }
         catch (Exception e){
-            return new ResponseEntity<>("Internal Server Error occurred while serving the request",HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal Server Error occurred while serving the request\nMessage: ",HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
     }
@@ -45,7 +45,7 @@ public class PatronController {
             return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
         }
         catch (Exception e){
-            return new ResponseEntity<>("Internal Server Error occurred while serving the request",HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal Server Error occurred while serving the request\nMessage: ",HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
     }
@@ -60,7 +60,7 @@ public class PatronController {
             return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST );
         }
         catch (Exception e){
-            return new ResponseEntity<>("Internal Server Error occurred while serving the request",HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal Server Error occurred while serving the request\nMessage: ",HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
 
@@ -78,7 +78,7 @@ public class PatronController {
             return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
         }
         catch (Exception e){
-            return new ResponseEntity<>("Internal Server Error occurred while serving the request",HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal Server Error occurred while serving the request\nMessage: ",HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
 
@@ -93,7 +93,7 @@ public class PatronController {
             return new ResponseEntity<>(e.getMessage(),HttpStatus.CONFLICT);
         }
         catch (Exception e){
-            return new ResponseEntity<>("Internal Server Error occurred while serving the request",HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal Server Error occurred while serving the request\nMessage: ",HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
